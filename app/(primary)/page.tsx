@@ -1,6 +1,11 @@
 import { HeroSection } from "./_components";
 import VisionICon from "/public/assests/vision.svg";
 import MissionICon from "/public/assests/mission.svg";
+import AccountabilityImage from "/public/assests/accountability.png";
+import ServiceImgae from "/public/assests/service.png";
+import ResponsibilityImage from "/public/assests/responsibility.png";
+import IntegrityImage from "/public/assests/integrigy.png";
+import ExcellenceImage from "/public/assests/excellence.png";
 import Image from "next/image";
 
 export default function Home() {
@@ -51,7 +56,37 @@ export default function Home() {
           </div>
         </div>
         <div className="absolute inset-0 bg-black bg-opacity-80 z-10"></div>
-        <div className="absolute inset-0 flex items-center lg:text-left text-center justify-center z-20"></div>
+        <div className="absolute inset-0 flex flex-col gap-8 items-center lg:text-left text-center justify-center z-20">
+          <h1 className="text-[28px] font-bold text-white">
+            Our Core <span className="text-[#FF0000]">Values</span>
+          </h1>
+          <div className="flex lg:flex-row flex-col justify-center gap-12 items-center mx-auto">
+            <div className="flex gap-3 items-center">
+              <Image src={AccountabilityImage} width={35} height={35} alt="accountabilty image" />
+              <h3 className="text-white">A - Accountability</h3>
+            </div>
+
+            <div className="flex gap-3 items-center">
+              <Image src={ResponsibilityImage} width={35} height={35} alt="responsibility image" />
+              <h3 className="text-white">R - Responsibility</h3>
+            </div>
+
+            <div className="flex gap-3 items-center">
+              <Image src={IntegrityImage} width={35} height={35} alt="integrity image" />
+              <h3 className="text-white">I - Integrity</h3>
+            </div>
+
+            <div className="flex gap-3 items-center">
+              <Image src={ServiceImgae} width={35} height={35} alt="service image" />
+              <h3 className="text-white">S - Service</h3>
+            </div>
+
+            <div className="flex gap-3 items-center">
+              <Image src={ExcellenceImage} width={35} height={35} alt="excellence image" />
+              <h3 className="text-white">E - Excellence</h3>
+            </div>
+          </div>
+        </div>
       </div>
     </main>
   );
