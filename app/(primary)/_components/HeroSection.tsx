@@ -61,7 +61,7 @@ const HeroSection = () => {
             estate market
           </h3>
           <div className="relative flex lg:justify-start justify-center items-center gap-4">
-            <div className="absolute lg:top-11 md:left-[19rem] top-[2.6rem] left-[8.5rem] lg:left-6">
+            <div className="absolute lg:top-11 md:left-[19rem] 375:left-[6.7rem] top-[2.6rem] left-[8.5rem] lg:left-6">
               <InspectionIcon />
             </div>
             <button className="border border-solid mt-7 text-[16px] text-center border-light rounded-full px-10 py-2 lg:py-0 lg:px-12 ">
