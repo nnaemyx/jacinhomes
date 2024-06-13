@@ -1,4 +1,7 @@
+import Image from "next/image";
+import Link from "next/link";
 import React from "react";
+import Logo from "public/assests/jacinhomes (3).png";
 
 function Footer() {
   return (
@@ -37,8 +40,27 @@ function Footer() {
         </div>
       </div>
       {/* Footer */}
-      <div className="bg-white">
-
+      <div className="bg-white px-[60px] ">
+        <div className="flex lg:flex-row flex-col">
+          <div>
+            <Link href="/" className="">
+              <div className="flex-shrink-0">
+                <Image
+                  src={Logo}
+                  alt="Jacinhomes Logo"
+                  width={240}
+                  height={74}
+                />
+              </div>
+            </Link>
+          </div>
+          <div>
+            <h1>Our Offices</h1>
+            <p>Floor 1 to 5, Km 42, Puri mall building, Oko Ado, Lekki Epe Express way, Lagos State</p>
+          </div>
+          <div></div>
+          <div></div>
+        </div>
       </div>
     </>
   );
