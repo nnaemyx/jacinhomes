@@ -1,6 +1,8 @@
 "use client";
 import React, { useState } from "react";
 import { useRouter } from "next/navigation";
+import "react-toastify/dist/ReactToastify.css";
+import { toast } from "react-toastify";
 
 const SignupPage = () => {
   const router = useRouter();
@@ -30,6 +32,7 @@ const SignupPage = () => {
       });
 
       if (response.ok) {
+        toast.success("Registration successful")
         // Redirect to success page or dashboard after successful signup
         router.push("/login"); // Replace with your success page route
       } else {

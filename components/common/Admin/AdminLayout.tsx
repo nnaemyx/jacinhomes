@@ -1,6 +1,5 @@
 "use client"
 import React, { useState, useEffect } from "react";
-import "react-toastify/dist/ReactToastify.css";
 import { Header, Sidebar } from "@/components/common";
 import Image from "next/image";
 import Logo from "/public/assests/jacinhomes (3).png"

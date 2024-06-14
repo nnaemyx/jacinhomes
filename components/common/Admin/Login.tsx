@@ -1,6 +1,9 @@
 "use client"
 import React, { useState } from 'react';
 import { useRouter } from 'next/navigation';
+import "react-toastify/dist/ReactToastify.css";
+import { toast } from 'react-toastify';
+
 
 const AdminLogin = () => {
   const [email, setEmail] = useState('');
@@ -23,6 +26,7 @@ const AdminLogin = () => {
       if (res.ok) {
         const { token } = await res.json();
         localStorage.setItem('token', token);
+        toast.success("Login successful")
         router.push('/admin'); 
       } else {
         const { message } = await res.json();
