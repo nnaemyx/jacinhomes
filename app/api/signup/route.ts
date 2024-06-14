@@ -26,14 +26,18 @@ export async function POST(request: Request) {
   const formData = await request.formData();
   const email = formData.get("email");
   const password = formData.get("password");
+  if (typeof password !== "string") {
+    return ;
+  }
+
   try {
     const hashedPassword = await hash(password, 10);
 
     const newUser = new User({ email, password: hashedPassword });
     await newUser.save();
 
-    return Response.json({ email, password })
+    return NextResponse.json({ email, password })
   } catch (error) {
-    NextResponse.json({ message: "Method not allowed" });
+    return NextResponse.json({ message: "Method not allowed" });
   }
 }
