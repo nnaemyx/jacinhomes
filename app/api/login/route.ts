@@ -33,30 +33,25 @@ export async function POST(request: Request) {
   const email = formData.get("email");
   const password = formData.get("password");
 
-try {
-  
-  const user = await User.findOne({ email });
-  
-  if (!user) {
-    return Response.json({ message: "Invalid credentials" });
-  }
-  
-  const isPasswordValid = await compare(password, user.password);
-  
-  if (!isPasswordValid) {
-    return Response.json({ message: "Invalid credentials" });
-  }
-  
-  const token = jwt.sign({ userId: user._id }, JWT_SECRET, {
-    expiresIn: "1h",
-  });
-  
-  return Response.json({ token });
-} catch (error) {
-  
-  NextResponse.json({ message: "Method not allowed" });
-}
+  try {
+    const user = await User.findOne({ email });
 
-  
-  
+    if (!user) {
+      return NextResponse.json({ message: "Invalid credentials" }, { status: 400 });
+    }
+
+    const isPasswordValid = await compare(password, user.password);
+
+    if (!isPasswordValid) {
+      return NextResponse.json({ message: "Invalid credentials" }, { status: 400 });
+    }
+
+    const token = jwt.sign({ userId: user._id }, JWT_SECRET, {
+      expiresIn: "1h",
+    });
+
+    return NextResponse.json({ token }, { status: 200 });
+  } catch (error) {
+    return NextResponse.json({ message: "Method not allowed" }, { status: 405 });
+  }
 }
