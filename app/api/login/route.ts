@@ -14,12 +14,17 @@ if (!MONGOURL) {
   throw new Error("Missing MONGOURL");
 }
 
-const userSchema = new mongoose.Schema({
-  email: String,
-  password: String,
+interface UserDocument extends mongoose.Document {
+  email: string;
+  password: string;
+}
+
+const userSchema = new mongoose.Schema<UserDocument>({
+  email: { type: String, required: true },
+  password: { type: String, required: true },
 });
 
-const User = mongoose.models.User || mongoose.model("User", userSchema);
+const User = mongoose.models.User || mongoose.model<UserDocument>("User", userSchema);
 
 const connectToDatabase = async () => {
   if (mongoose.connection.readyState === 0) {
@@ -30,11 +35,11 @@ const connectToDatabase = async () => {
 export async function POST(request: Request) {
   await connectToDatabase();
   const formData = await request.formData();
-  const email = formData.get("email");
-  const password = formData.get("password");
+  const email = formData.get("email") as string;
+  const password = formData.get("password") as string;
 
   try {
-    const user = await User.findOne({ email });
+    const user = await User.findOne({ email }).exec();
 
     if (!user) {
       return NextResponse.json({ message: "Invalid credentials" }, { status: 400 });
