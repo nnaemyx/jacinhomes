@@ -6,9 +6,10 @@ import jwt from "jsonwebtoken";
 const JWT_SECRET = process.env.JWT_SECRET;
 const MONGOURL = process.env.MONGOURL;
 
-if (!JWT_SECRET) {
-  throw new Error("Missing JWT_SECRET");
-}
+type userobject= {password:string, email:string, _id:string}
+type login = (...params:any[]) =>userobject;
+
+
 
 if (!MONGOURL) {
   throw new Error("Missing MONGOURL");
@@ -37,9 +38,13 @@ export async function POST(request: Request) {
   const formData = await request.formData();
   const email = formData.get("email") as string;
   const password = formData.get("password") as string;
+  if (!JWT_SECRET) {
+    throw new Error("Missing JWT_SECRET");
+  }
 
   try {
-    const user = await User.findOne({ email }).exec();
+    const user = await (User.findOne as unknown as login)({ email });
+    
 
     if (!user) {
       return NextResponse.json({ message: "Invalid credentials" }, { status: 400 });
