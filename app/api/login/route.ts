@@ -51,10 +51,10 @@ try {
     expiresIn: "1h",
   });
   
-  Response.json({ token });
+  return Response.json({ token });
 } catch (error) {
   
-  Response.json({ message: "Method not allowed" });
+  NextResponse.json({ message: "Method not allowed" });
 }
 
   
