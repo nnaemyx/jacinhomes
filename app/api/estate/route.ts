@@ -1,7 +1,7 @@
 import { NextResponse } from "next/server";
 import mongoose from "mongoose";
 import cloudinary from "../../../lib/cloudinary"; // Correct relative path
-import Estate from "../../../models/estateModel";
+import Estate from "../../../models/estateModel"; // Ensure this import is correct
 import { Readable } from "stream";
 import { CloudinaryUploadResult } from "../../../lib/types"; // Import the type
 
@@ -74,11 +74,17 @@ export async function POST(request: Request) {
   }
 }
 
+interface IEstate extends mongoose.Document {
+  title: string;
+  description: string;
+  image: string;
+}
+
 export async function GET() {
   await connectToDatabase();
 
   try {
-    const estates = await Estate.find();
+    const estates = await Estate.find<IEstate>();
     return NextResponse.json(estates, { status: 200 });
   } catch (error) {
     return NextResponse.json(
