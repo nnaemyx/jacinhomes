@@ -17,11 +17,7 @@ const connectToDatabase = async () => {
   }
 };
 
-export const config = {
-  api: {
-    bodyParser: false,
-  },
-};
+
 
 export async function POST(request: Request) {
   await connectToDatabase();
