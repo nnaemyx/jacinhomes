@@ -17,8 +17,6 @@ const connectToDatabase = async () => {
   }
 };
 
-
-
 export async function POST(request: Request) {
   await connectToDatabase();
 
@@ -37,7 +35,7 @@ export async function POST(request: Request) {
   const buffer = Buffer.from(await imageFile.arrayBuffer());
 
   const uploadStream = () =>
-    new Promise((resolve, reject) => {
+    new Promise<CloudinaryUploadResult>((resolve, reject) => {
       const stream = cloudinary.uploader.upload_stream(
         { folder: "estates" },
         (error, result) => {
@@ -53,35 +51,39 @@ export async function POST(request: Request) {
     });
 
   try {
-    const result: any = await uploadStream();
+    const result: CloudinaryUploadResult = await uploadStream();
 
     if (result.secure_url) {
-      const newEstate = await Estate.create({
+      const newEstate = new Estate({
         title,
         description,
         image: result.secure_url,
       });
-      await newEstate.save();
-  
-      return NextResponse.json(newEstate, { status: 201 });
-    }else {
-        // Handle case where upload succeeded but no secure URL is returned
-        return NextResponse.json({ message: "Upload failed: No secure URL" }, { status: 500 });
-      }
 
+      await newEstate.save();
+
+      return NextResponse.json(newEstate, { status: 201 });
+    } else {
+      return NextResponse.json(
+        { message: "Upload failed: No secure URL" },
+        { status: 500 }
+      );
+    }
   } catch (error) {
     return NextResponse.json({ message: "Upload failed" }, { status: 500 });
   }
 }
 
-
 export async function GET() {
-    await connectToDatabase();
-  
-    try {
-      const estates = await Estate.find();
-      return NextResponse.json(estates, { status: 200 });
-    } catch (error) {
-      return NextResponse.json({ message: 'Failed to fetch estates' }, { status: 500 });
-    }
+  await connectToDatabase();
+
+  try {
+    const estates = await Estate.find();
+    return NextResponse.json(estates, { status: 200 });
+  } catch (error) {
+    return NextResponse.json(
+      { message: "Failed to fetch estates" },
+      { status: 500 }
+    );
   }
+}
