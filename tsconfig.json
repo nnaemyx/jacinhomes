@@ -17,7 +17,7 @@
 		"isolatedModules": true,
 		"esModuleInterop": true,
 		"moduleDetection": "force",
-		"verbatimModuleSyntax": true,
+		"verbatimModuleSyntax": false,
 		"plugins": [
 			{
 				"name": "next"
