@@ -74,14 +74,17 @@ export async function POST(request: Request) {
   }
 }
 
-type userobject= {}
-type login = (...params:any[]) =>userobject;
+interface IEstate extends mongoose.Document {
+  title: string;
+  description: string;
+  image: string;
+}
 
 export async function GET() {
   await connectToDatabase();
 
   try {
-    const estates = await(Estate.find as unknown as login);
+    const estates = await (Estate.find() as unknown as Promise<IEstate[]>);
     return NextResponse.json(estates, { status: 200 });
   } catch (error) {
     return NextResponse.json(
