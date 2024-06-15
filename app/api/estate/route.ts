@@ -64,7 +64,10 @@ export async function POST(request: Request) {
       await newEstate.save();
   
       return NextResponse.json(newEstate, { status: 201 });
-    }
+    }else {
+        // Handle case where upload succeeded but no secure URL is returned
+        return NextResponse.json({ message: "Upload failed: No secure URL" }, { status: 500 });
+      }
 
   } catch (error) {
     return NextResponse.json({ message: "Upload failed" }, { status: 500 });
