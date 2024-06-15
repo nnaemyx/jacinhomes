@@ -5,8 +5,6 @@ import { menuItems } from "../common"; // Ensure this import has type definition
 import { ChevronDownIcon } from "../icons";
 import DropUpIcon from "../icons/DropUp";
 
-
-
 interface SidebarProps {
   onTitleClick: (title: string) => void;
 }
@@ -30,13 +28,13 @@ const Sidebar: React.FC<SidebarProps> = ({ onTitleClick }) => {
 
   return (
     <nav className="text-center">
-      <ul className="mt-[3rem] leading-[4rem]">
+      <ul className="mt-8 leading-10  py-4 space-y-6 md:leading-[4rem]">
         {menuItems.map(({ href, title, subItems }: menuItems) => (
-          <li className="text-[14px] font-gilmerregular" key={title}>
+          <li className="text-sm md:text-[14px] font-gilmerregular" key={title}>
             {subItems ? (
               <div className="relative">
                 <div
-                  className="px-6 w-full cursor-pointer"
+                  className="px-4 md:px-6 w-full cursor-pointer"
                   onClick={() => {
                     onTitleClick(title);
                     toggleDropdown(title);
@@ -56,12 +54,12 @@ const Sidebar: React.FC<SidebarProps> = ({ onTitleClick }) => {
                   </div>
                 </div>
                 {activeDropdowns[title] && (
-                  <ul className="bg-white">
+                  <ul className="bg-white  py-4 space-y-4">
                     {subItems.map(({ href: subHref, title: subTitle }: menuItems) => (
                       <li key={subTitle}>
                         <Link href={subHref ?? "#"}>
                           <div
-                            className={`flex items-center justify-start gap-2 px-14 w-full cursor-pointer ${
+                            className={`flex items-center justify-start gap-2 px-10 md:px-14 w-full cursor-pointer ${
                               isSubItemActive({ href: subHref, title: subTitle }, title)
                                 ? "bg-primary text-white"
                                 : ""
@@ -78,7 +76,7 @@ const Sidebar: React.FC<SidebarProps> = ({ onTitleClick }) => {
             ) : (
               <Link href={href ?? "#"}>
                 <p
-                  className={`flex items-center gap-2 px-6 w-full cursor-pointer ${
+                  className={`flex items-center gap-2 px-4 md:px-6 w-full cursor-pointer ${
                     pathname === href && "bg-primary fill-white text-white"
                   }`}
                   onClick={() => onTitleClick(title)}

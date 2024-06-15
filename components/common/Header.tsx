@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from "react";
-import Link from "next/link";
 import { useRouter } from "next/navigation";
 
 interface HeaderProps {
@@ -18,12 +17,12 @@ const Header: React.FC<HeaderProps> = ({ clickedTitle }) => {
   };
 
   return (
-    <div className="w-full hidden lg:block">
+    <div className="w-full">
       <div className="flex justify-between">
         <div>
           <h1>{clickedTitle}</h1>
         </div>
-        <div className="flex items-center space-x-5">
+        <div className="hidden lg:flex items-center space-x-5">
           <button
             onClick={handleSignOut}
             className="bg-[#314484] text-gray-50 py-2 px-6 rounded hover:bg-red-500"
