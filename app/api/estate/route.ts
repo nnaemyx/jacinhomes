@@ -80,11 +80,15 @@ interface IEstate extends mongoose.Document {
   image: string;
 }
 
+type userobject= {}
+type login = (...params:any[]) =>userobject;
+
+
 export async function GET() {
   await connectToDatabase();
 
   try {
-    const estates = await (Estate.find() as unknown as Promise<IEstate[]>);
+    const estates = await (Estate.find as unknown as Promise<IEstate[]>);
     return NextResponse.json(estates, { status: 200 });
   } catch (error) {
     return NextResponse.json(
