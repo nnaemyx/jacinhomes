@@ -3,7 +3,6 @@ import mongoose from "mongoose";
 import cloudinary from "../../../lib/cloudinary"; // Correct relative path
 import Estate from "../../../models/estateModel";
 import { Readable } from "stream";
-import { CloudinaryUploadResult } from "../../../lib/types"; // Import the type
 
 const MONGOURL = process.env.MONGOURL;
 
@@ -17,13 +16,13 @@ const connectToDatabase = async () => {
   }
 };
 
-export async function POST(request: Request) {
+export async function POST(request) {
   await connectToDatabase();
 
   const formData = await request.formData();
-  const title = formData.get("title") as string;
-  const description = formData.get("description") as string;
-  const imageFile = formData.get("image") as File | null;
+  const title = formData.get("title");
+  const description = formData.get("description")  ;
+  const imageFile = formData.get("image") ;
 
   if (!title || !description || !imageFile) {
     return NextResponse.json(
@@ -51,7 +50,7 @@ export async function POST(request: Request) {
     });
 
   try {
-    const result: CloudinaryUploadResult = await uploadStream();
+    const result = await uploadStream();
 
     if (result.secure_url) {
       const newEstate = new Estate({
@@ -74,21 +73,12 @@ export async function POST(request: Request) {
   }
 }
 
-interface IEstate extends mongoose.Document {
-  title: string;
-  description: string;
-  image: string;
-}
-
-type userobject= {}
-type login = (...params:any[]) =>userobject;
-
 
 export async function GET() {
   await connectToDatabase();
 
   try {
-    const estates = await (Estate.find as unknown as Promise<IEstate[]>);
+    const estates = await Estate.find();
     return NextResponse.json(estates, { status: 200 });
   } catch (error) {
     return NextResponse.json(

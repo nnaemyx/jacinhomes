@@ -41,6 +41,6 @@
 		"noUncheckedIndexedAccess": true
 	},
 
-	"include": ["**/*.ts", "**/*.tsx", "public/**/*.tsx", ".next/types/**/*.ts"],
+	"include": ["**/*.ts", "**/*.tsx", "public/**/*.tsx", ".next/types/**/*.ts", "app/api/estate/route.js"],
 	"exclude": ["node_modules"]
 }
