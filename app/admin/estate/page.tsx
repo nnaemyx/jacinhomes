@@ -22,7 +22,7 @@ const Estate = () => {
     formData.append('image', image);
 
     try {
-      const response = await fetch('/api/estate', {
+      const response = await fetch('https://jacinhomes-api.vercel.app/api/estate/estate', {
         method: 'POST',
         body: formData,
       });

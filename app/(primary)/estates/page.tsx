@@ -15,7 +15,7 @@ const Estates: React.FC = () => {
 
   useEffect(() => {
     const fetchEstates = async () => {
-      const res = await fetch("/api/estate");
+      const res = await fetch("https://jacinhomes-api.vercel.app/api/estate/estate");
       const data = await res.json();
       setEstates(data);
     };
@@ -27,7 +27,7 @@ const Estates: React.FC = () => {
     <div className="min-h-screen mt-[5rem] lg:mt-[10rem] lg:px-[6rem] px-4 flex flex-col items-center">
       <h1 className="text-4xl my-8 font-bold">Our <span className="text-[#FF0000]">Estates</span></h1>
       <div className="Flex flex-col w-full gap-8 space-y-[2rem]">
-        {estates.map((estate) => (
+        {estates?.map((estate) => (
           <div
             key={estate._id}
             className="border p-4 rounded flex xl:flex-row flex-col gap-8 shadow-md"
