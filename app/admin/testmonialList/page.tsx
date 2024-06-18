@@ -3,10 +3,18 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
 
+interface Testimonial {
+  _id: string;
+  name: string;
+  message: string;
+  mediaType: string;
+  media: string;
+}
+
 const ManageTestimonials = () => {
-  const [testimonials, setTestimonials] = useState([]);
+  const [testimonials, setTestimonials] = useState<Testimonial[]>([]);
   const [editMode, setEditMode] = useState(false);
-  const [editId, setEditId] = useState(null);
+  const [editId, setEditId] = useState<string | null>(null);
   const [name, setName] = useState("");
   const [message, setMessage] = useState("");
   const [media, setMedia] = useState<File | null>(null);
@@ -20,7 +28,7 @@ const ManageTestimonials = () => {
     fetchTestimonials();
   }, []);
 
-  const handleEdit = (testimonial) => {
+  const handleEdit = (testimonial: Testimonial) => {
     setEditMode(true);
     setEditId(testimonial._id);
     setName(testimonial.name);
@@ -28,12 +36,12 @@ const ManageTestimonials = () => {
     setMediaType(testimonial.mediaType);
   };
 
-  const handleDelete = async (id) => {
+  const handleDelete = async (id:string) => {
     await axios.delete(`https://jacinhomes-api.vercel.app/api/${id}/testimonial`);
     setTestimonials(testimonials.filter((t) => t._id !== id));
   };
 
-  const handleSubmit = async (e) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
 
     if (!name || !message || !media) {
