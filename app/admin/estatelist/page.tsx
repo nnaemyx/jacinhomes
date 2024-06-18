@@ -3,10 +3,17 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
 
+interface Estate {
+  _id: string;
+  title: string;
+  description: string;
+  image: string;
+}
+
 const ManageEstates = () => {
-  const [estates, setEstates] = useState([]);
+  const [estates, setEstates] = useState<Estate[]>([]);
   const [editMode, setEditMode] = useState(false);
-  const [editId, setEditId] = useState(null);
+  const [editId, setEditId] = useState<string | null>(null);
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
   const [media, setMedia] = useState<File | null>(null);
@@ -19,14 +26,14 @@ const ManageEstates = () => {
     fetchEstates();
   }, []);
 
-  const handleEdit = (estate) => {
+  const handleEdit = (estate: Estate) => {
     setEditMode(true);
     setEditId(estate._id);
     setTitle(estate.title);
     setDescription(estate.description);
   };
 
-  const handleDelete = async (id) => {
+  const handleDelete = async (id: string) => {
     try {
       await axios.delete(`https://jacinhomes-api.vercel.app/api/${id}/estate`);
       setEstates(estates.filter((estate) => estate._id !== id));
@@ -38,36 +45,47 @@ const ManageEstates = () => {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
 
-    const reader = new FileReader();
-    reader.readAsDataURL(media);
-    reader.onloadend = async () => {
-      try {
-        const base64Media = reader.result?.toString().split(",")[1];
-        const response = await axios.put(`https://jacinhomes-api.vercel.app/api/${editId}/estate`, {
-          title,
-          description,
-          image: base64Media,
-        });
+    if (!editId) return;
 
-        if (response.status === 200) {
-          setEstates(
-            estates.map((estate) =>
-              estate._id === editId ? response.data : estate
-            )
-          );
-          setEditMode(false);
-          setEditId(null);
-          setTitle("");
-          setDescription("");
-          setMedia(null);
-        } else {
-          alert("Failed to update estate.");
-        }
-      } catch (error) {
-        console.error("Error updating estate", error);
-        alert("Error updating estate.");
+    try {
+      let base64Media: string | undefined;
+      if (media) {
+        const reader = new FileReader();
+        reader.readAsDataURL(media);
+        reader.onloadend = async () => {
+          base64Media = reader.result?.toString().split(",")[1];
+          await updateEstate(base64Media);
+        };
+      } else {
+        await updateEstate();
       }
-    };
+    } catch (error) {
+      console.error("Error updating estate", error);
+      alert("Error updating estate.");
+    }
+  };
+
+  const updateEstate = async (base64Media?: string) => {
+    const response = await axios.put(`https://jacinhomes-api.vercel.app/api/${editId}/estate`, {
+      title,
+      description,
+      image: base64Media,
+    });
+
+    if (response.status === 200) {
+      setEstates(
+        estates.map((estate) =>
+          estate._id === editId ? response.data : estate
+        )
+      );
+      setEditMode(false);
+      setEditId(null);
+      setTitle("");
+      setDescription("");
+      setMedia(null);
+    } else {
+      alert("Failed to update estate.");
+    }
   };
 
   return (
