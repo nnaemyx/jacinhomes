@@ -17,7 +17,7 @@ const menuItems = [
         title: "Add Estate",
       },
       {
-        href: "/admin/estateList",
+        href: "/admin/ManagestateList",
         title: "Estate List",
       },
       {
