@@ -19,7 +19,6 @@ const AdminLayoutClient: React.FC<AdminLayoutClientProps> = ({ children }) => {
 
   const handleTitleClick = (title: string) => {
     setClickedTitle(title);
-    setIsSidebarOpen(false);
   };
 
   const toggleSidebar = () => {
@@ -35,7 +34,7 @@ const AdminLayoutClient: React.FC<AdminLayoutClientProps> = ({ children }) => {
     }
   };
 
-   useEffect(() => {
+  useEffect(() => {
     const timer = setTimeout(() => {
       setIsLoading(false);
     }, 3000);
@@ -66,15 +65,10 @@ const AdminLayoutClient: React.FC<AdminLayoutClientProps> = ({ children }) => {
 
   return (
     <>
-      <div className=" font-opensans bg-white flex flex-col md:flex-row">
-        <header className="flex justify-between items-center px-4 md:hidden">
+      <div className="min-h-screen font-opensans bg-white flex flex-col md:flex-row">
+        <header className="flex justify-between items-center px-4 lg:hidden">
           {!isSidebarOpen && (
-            <Image
-              src={Logo}
-              width={150}
-              height={0}
-              alt="logo"
-            />
+            <Image src={Logo} width={150} height={0} alt="logo" />
           )}
           <div className="flex items-center space-x-4">
             <button onClick={toggleSidebar}>
@@ -99,21 +93,34 @@ const AdminLayoutClient: React.FC<AdminLayoutClientProps> = ({ children }) => {
               )}
             </button>
             <button
-            onClick={handleSignOut}
-            className="bg-[#314484] text-gray-50 py-2 px-6 rounded hover:bg-red-500"
-          >
-            Sign out
-          </button>
+              onClick={handleSignOut}
+              className="bg-[#314484] text-gray-50 py-2 px-6 rounded hover:bg-red-500"
+            >
+              Sign out
+            </button>
           </div>
         </header>
+
         <aside
-         ref={sidebarRef}
+          ref={sidebarRef}
           className={`${
             isSidebarOpen ? "translate-x-0" : "-translate-x-full"
-          } fixed top-0 left-0 h-screen w-[232px] 2xl:w-[263px] bg-white text-center text-secondary border-r border-solid transition-transform  py-4 space-y-6  duration-300 md:relative md:translate-x-0 z-50`}
+          } fixed top-0 left-0 h-screen w-[232px] 2xl:w-[263px] bg-white text-center text-secondary border-r border-solid transition-transform lg:hidden block  py-4 space-y-6  duration-300 md:relative md:translate-x-0 z-50`}
         >
           <Sidebar onTitleClick={handleTitleClick} />
         </aside>
+
+        <aside className="w-[232px] hidden lg:block text-center mx-auto text-secondary bg-white border-r border-solid 2xl:w-[263px]">
+          <Image
+            src={Logo}
+            width={170}
+            height={0}
+            alt="logo"
+            className=""
+          />
+          <Sidebar onTitleClick={handleTitleClick} />
+        </aside>
+
         <main className="flex-1 mt-2 md:mt-8 px-4 md:px-6 flex flex-col">
           <Header clickedTitle={clickedTitle} />
           {children}

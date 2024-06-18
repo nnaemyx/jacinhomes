@@ -7,7 +7,7 @@ function Footer() {
   return (
     <>
       {/* Newsletter */}
-      <div className="bg-[#0A1229] py-[100px] xl:px-[260px]  mt-24 text-white">
+      <div className="bg-[#0A1229] py-[100px] 2xl:px-[260px]  mt-24 text-white">
         <div className="flex justify-between xl:flex-row flex-col xl:items-center">
           <div className="px-[60px]">
             <h1 className="text-[22px] font-bold">

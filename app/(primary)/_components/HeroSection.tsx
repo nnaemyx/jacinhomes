@@ -47,9 +47,9 @@ const HeroSection = () => {
 
       {/* Overlay */}
       <div className="absolute inset-0 bg-black bg-opacity-50 z-10"></div>
-
+ px-0
       {/* Text Overlay */}
-      <div className="absolute inset-0 flex items-center lg:text-left text-center justify-center z-20">
+      <div className="absolute inset-0 flex items-center xl:px-12 2xl:px-0 xl:text-left text-center justify-center z-20">
         <div className=" text-light lg:leading-[3rem]">
           <h3 className=" lg:tracking-[.1rem] tracking-[-.01rem] font-[700] leading-[1.2rem]">A Home For Everyone</h3>
           <h1 className="text-4xl mt-2 lg:mt-0 lg:tracking-[.2rem] leading-[36px] lg:leading-0 tracking-[3px] text- lg:text-6xl lg:w-[80%] lg:px-0 px-8 font-bold text-white">

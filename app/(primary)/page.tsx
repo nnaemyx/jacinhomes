@@ -16,25 +16,35 @@ export default function Home() {
         <h1 className="text-[36px] font-[700] my-[15px]">
           About <span className="text-red-600">Us</span>
         </h1>
-        <p className="text-left text-[1rem] xl:px-[21rem]">
+        <div className="text-left text-[1rem] xl:px-[10rem] 2xl:px-[21rem]">
           Welcome to Jacin Homes, your trusted partner in land acquisition and
           investment! At Jacin Homes, we bridge the gap between individuals
           seeking to own land and reputable real estate companies, providing a
-          seamless and secure experience. Our mission is to make land ownership
-          a reality for everyone, regardless of budget or location. Through
-          strategic partnerships with industry leaders like Pwan group, Brost
-          Global, and others, we offer a diverse portfolio of genuine and
-          affordable land options across Nigeria. Our extensive network covers
-          key locations, including: - Lagos - Abuja - Asaba - Enugu - Orlu -
-          Ebonyi - Ogun - Warri - Agbo - Imo - Aba - Abia - Akwa Ibom - Warri -
-          Nnewi - Awka Our commitment to excellence ensures: - Transparent
-          transactions - Efficient land acquisition processes - Secure
-          investments - Exceptional customer service At Jacin Homes, we
-          prioritize our clients' satisfaction, striving to build long-term
-          relationships and provide services that exceed expectations. Whether
-          you're an individual or organization, we're dedicated to making land
-          ownership accessible, stress-free, and rewarding.
-        </p>
+          seamless and secure experience.{" "}
+          <p className="mt-2">
+            Our mission is to make land ownership a reality for everyone,
+            regardless of budget or location. Through strategic partnerships
+            with industry leaders like Pwan group, Brost Global, and others, we
+            offer a diverse portfolio of genuine and affordable land options
+            across Nigeria
+          </p>{" "}
+          <p className="mt-2">
+            Our extensive network covers key locations, including: - Lagos -
+            Abuja - Asaba - Enugu - Orlu - Ebonyi - Ogun - Warri - Agbo - Imo -
+            Aba - Abia - Akwa Ibom - Warri - Nnewi - Awka Our commitment to
+            excellence ensures: - Transparent transactions - Efficient land
+            acquisition processes - Secure investments - Exceptional customer
+            service
+          </p>{" "}
+          <p className="mt-2">
+          At Jacin Homes, we prioritize our clients' satisfaction, striving to
+          build long-term relationships and provide services that exceed
+          expectations. Whether you're an individual or organization, we're
+          dedicated to making land ownership accessible, stress-free, and
+          rewarding.
+          </p>
+          
+        </div>
       </div>
       <div className="flex md:flex-row justify-center px-3 md:w-full gap-6 lg:w-[800px] mx-auto  items-center text-center flex-col mt-12 lg:mt-[6rem]">
         <div className="bg-white shadow-md rounded-md mx-auto  flex flex-col items-center text-center py-[60px] px-[30px] leading-[1.5rem] lg:w-[300px] md:h-[400px] md:w-[300px] lg:h-[400px]">

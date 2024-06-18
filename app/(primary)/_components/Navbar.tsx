@@ -39,7 +39,7 @@ const Navbar = () => {
         : "bg-black"
     }`}
     >
-      <div className="max-w-[90%] mx-auto px-4 sm:px-6  lg:px-8 flex items-center justify-between lg:gap-[12rem] xl:justify-start lg:h-32 h-[5rem]">
+      <div className="2xl:max-w-[90%] mx-auto px-4 sm:px-6  lg:px-2 flex items-center justify-between 2xl:gap-[12rem] 2xl:justify-start lg:h-32 h-[5rem]">
         <Link href="/" className="hidden lg:block">
           <div className="flex-shrink-0">
             <Image src={Logo} alt="Jacinhomes Logo" width={129.73} height={40} />

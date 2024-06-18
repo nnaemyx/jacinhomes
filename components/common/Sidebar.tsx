@@ -61,7 +61,7 @@ const Sidebar: React.FC<SidebarProps> = ({ onTitleClick }) => {
                           <div
                             className={`flex items-center justify-start gap-2 px-10 md:px-14 w-full cursor-pointer ${
                               isSubItemActive({ href: subHref, title: subTitle }, title)
-                                ? "bg-primary text-white"
+                                ? "bg-primary py-4 text-white"
                                 : ""
                             }`}
                           >
@@ -77,7 +77,7 @@ const Sidebar: React.FC<SidebarProps> = ({ onTitleClick }) => {
               <Link href={href ?? "#"}>
                 <p
                   className={`flex items-center gap-2 px-4 md:px-6 w-full cursor-pointer ${
-                    pathname === href && "bg-primary fill-white text-white"
+                    pathname === href && "bg-primary py-4 fill-white text-white"
                   }`}
                   onClick={() => onTitleClick(title)}
                 >
