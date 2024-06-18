@@ -28,7 +28,7 @@ const Sidebar: React.FC<SidebarProps> = ({ onTitleClick }) => {
 
   return (
     <nav className="text-center">
-      <ul className="mt-8 leading-10  py-4 space-y-6 md:leading-[4rem]">
+      <ul className="mt-8 space-y-12 leading-[4rem]">
         {menuItems.map(({ href, title, subItems }: menuItems) => (
           <li className="text-sm md:text-[14px] font-gilmerregular" key={title}>
             {subItems ? (

@@ -17,15 +17,15 @@ const menuItems = [
         title: "Add Estate",
       },
       {
-        href: "/admin/catalog/Procedurelist",
+        href: "/admin/estateList",
         title: "Estate List",
       },
       {
-        href: "/admin/catalog/Productlist",
+        href: "/admin/flyerPromo",
         title: "Add Flyers & Promos",
       },
       {
-        href: "/admin/catalog/Procedurelist",
+        href: "/admin/flyerPromoList",
         title: "Flyers & Promos List",
       },
       {
@@ -45,11 +45,11 @@ const menuItems = [
         title: "Videos List",
       },
       {
-        href: "/admin/catalog/Color",
+        href: "/admin/testmonials",
         title: "Add Testimonials",
       },
       {
-        href: "/admin/catalog/Colorlist",
+        href: "/admin/testmonialList",
         title: "Testimonial List",
       },
     ],
