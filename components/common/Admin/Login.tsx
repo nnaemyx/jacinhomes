@@ -18,7 +18,7 @@ const AdminLogin = () => {
       formData.append('email', email);
       formData.append('password', password);
 
-      const res = await fetch('/api/login', {
+      const res = await fetch('https://jacinhomes-api.vercel.app/api/users/login', {
         method: 'POST',
         body: formData,
       });

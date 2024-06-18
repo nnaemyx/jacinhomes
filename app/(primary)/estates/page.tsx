@@ -15,7 +15,7 @@ const Estates: React.FC = () => {
 
   useEffect(() => {
     const fetchEstates = async () => {
-      const res = await fetch("https://jacinhomes-api.vercel.app/api/estate/estate");
+      const res = await fetch("https://jacinhomes-api.vercel.app/api/catalog/estate");
       const data = await res.json();
       setEstates(data);
     };

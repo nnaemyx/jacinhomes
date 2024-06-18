@@ -26,7 +26,7 @@ const SignupPage = () => {
       formData.append("password", password);
 
       // Send data to backend for signup
-      const response = await fetch("/api/signup", {
+      const response = await fetch("https://jacinhomes-api.vercel.app/api/users/signup", {
         method: "POST",
         body: formData,
       });
