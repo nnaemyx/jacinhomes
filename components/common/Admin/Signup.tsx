@@ -20,19 +20,16 @@ const SignupPage = () => {
     }
 
     try {
-      // Create FormData object and append fields
-      const formData = new FormData();
-      formData.append("email", email);
-      formData.append("password", password);
-
-      // Send data to backend for signup
       const response = await fetch("https://jacinhomes-api.vercel.app/api/users/signup", {
         method: "POST",
-        body: formData,
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ email, password }),
       });
 
       if (response.ok) {
-        toast.success("Registration successful")
+        toast.success("Registration successful");
         // Redirect to success page or dashboard after successful signup
         router.push("/login"); // Replace with your success page route
       } else {
@@ -61,7 +58,7 @@ const SignupPage = () => {
           </label>
         </div>
         <br />
-        <div  className="mb-4">
+        <div className="mb-4">
           <label className="block mb-1">
             Password:
             <input
@@ -73,7 +70,12 @@ const SignupPage = () => {
           </label>
         </div>
         <br />
-        <button className="bg-blue-500 text-white py-2 px-4 rounded-md hover:bg-blue-600" type="submit">Signup</button>
+        <button
+          className="bg-blue-500 text-white py-2 px-4 rounded-md hover:bg-blue-600"
+          type="submit"
+        >
+          Signup
+        </button>
       </form>
     </div>
   );

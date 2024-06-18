@@ -1,39 +1,37 @@
-"use client"
-import React, { useState } from 'react';
-import { useRouter } from 'next/navigation';
+"use client";
+import React, { useState } from "react";
+import { useRouter } from "next/navigation";
 import "react-toastify/dist/ReactToastify.css";
-import { toast } from 'react-toastify';
-
+import { toast } from "react-toastify";
 
 const AdminLogin = () => {
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
-  const [error, setError] = useState('');
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [error, setError] = useState("");
   const router = useRouter();
 
-  const handleSubmit = async (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     try {
-      const formData = new FormData();
-      formData.append('email', email);
-      formData.append('password', password);
-
-      const res = await fetch('https://jacinhomes-api.vercel.app/api/users/login', {
-        method: 'POST',
-        body: formData,
+      const res = await fetch("https://jacinhomes-api.vercel.app/api/users/login", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ email, password }),
       });
 
       if (res.ok) {
         const { token } = await res.json();
-        localStorage.setItem('token', token);
-        toast.success("Login successful")
-        router.push('/admin'); 
+        localStorage.setItem("token", token);
+        toast.success("Login successful");
+        router.push("/admin");
       } else {
         const { message } = await res.json();
         setError(message);
       }
     } catch (err) {
-      setError('Something went wrong. Please try again.');
+      setError("Something went wrong. Please try again.");
     }
   };
 
