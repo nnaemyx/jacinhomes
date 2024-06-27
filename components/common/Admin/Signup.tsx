@@ -3,6 +3,7 @@ import React, { useState } from "react";
 import { useRouter } from "next/navigation";
 import "react-toastify/dist/ReactToastify.css";
 import { toast } from "react-toastify";
+import axios from "axios";
 
 const SignupPage = () => {
   const router = useRouter();
@@ -20,21 +21,21 @@ const SignupPage = () => {
     }
 
     try {
-      const response = await fetch("https://jacinhomes-api.vercel.app/api/users/signup", {
-        method: "POST",
+      const response = await axios.post("https://jacinhomes-api.vercel.app/api/users/signup", {
+        email,
+        password,
+      }, {
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify({ email, password }),
       });
 
-      if (response.ok) {
+      if (response.status === 200) {
         toast.success("Registration successful");
         // Redirect to success page or dashboard after successful signup
         router.push("/login"); // Replace with your success page route
       } else {
-        const data = await response.json();
-        setError(data.message || "Signup failed");
+        setError(response.data.message || "Signup failed");
       }
     } catch (error) {
       setError("An error occurred. Please try again later.");

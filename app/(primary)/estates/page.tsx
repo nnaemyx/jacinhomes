@@ -57,7 +57,7 @@ const Estates: React.FC = () => {
                   download
                    className="block mb-2 text-center  border border-red-600 bg-white py-2 rounded-md text-red-600 font-bold text-[20px]"
                 >
-                  Download Subscription Form
+                  Book Inspection
                 </a>
               </div>
             </div>
