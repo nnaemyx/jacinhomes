@@ -53,8 +53,8 @@ const Estates: React.FC = () => {
                   Download Flyers
                 </a>
                 <a
-                  href="/subscription-form.pdf"
-                  download
+                  href="https://forms.gle/gAtbp38JMEozDt3q6"
+                  target="_blank"
                    className="block mb-2 text-center  border border-red-600 bg-white py-2 rounded-md text-red-600 font-bold text-[20px]"
                 >
                   Book Inspection
