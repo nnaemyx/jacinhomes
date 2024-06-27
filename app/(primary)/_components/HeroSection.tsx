@@ -4,6 +4,7 @@ import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import InspectionIcon from "@/components/icons/Inspection";
+import Link from "next/link";
 
 
 const HeroSection = () => {
@@ -64,9 +65,9 @@ const HeroSection = () => {
             <div className="absolute lg:top-11 md:left-[19rem] 375:left-[6.7rem] top-[2.6rem] left-[8.5rem] lg:left-6">
               <InspectionIcon />
             </div>
-            <button className="border border-solid mt-7 text-[16px] text-center border-light rounded-full px-10 py-2 lg:py-0 lg:px-12 ">
+            <Link href="https://forms.gle/gAtbp38JMEozDt3q6" className="border border-solid mt-7 text-[16px] text-center border-light rounded-full px-10 py-2 lg:py-0 lg:px-12 ">
               Book Inspection
-            </button>
+            </Link>
           </div>
         </div>
       </div>
