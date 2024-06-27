@@ -1,40 +1,63 @@
-"use client"
-import { useState } from 'react';
+"use client";
+import { useState } from "react";
 
 const Estate = () => {
-  const [title, setTitle] = useState('');
-  const [description, setDescription] = useState('');
+  const [title, setTitle] = useState("");
+  const [description, setDescription] = useState("");
   const [image, setImage] = useState<File | null>(null);
-  const [error, setError] = useState('');
-  const [success, setSuccess] = useState('');
+  const [error, setError] = useState("");
+  const [success, setSuccess] = useState("");
+
+  const handleImageUpload = (file: File) => {
+    return new Promise<string>((resolve, reject) => {
+      const reader = new FileReader();
+      reader.onloadend = () => {
+        if (reader.result) {
+          resolve(reader.result.toString());
+        } else {
+          reject(new Error("Failed to convert image to base64"));
+        }
+      };
+      reader.onerror = reject;
+      reader.readAsDataURL(file);
+    });
+  };
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+    setError("");
+    setSuccess("");
 
     if (!title || !description || !image) {
-      setError('All fields are required');
+      setError("All fields are required");
       return;
     }
 
-    const formData = new FormData();
-    formData.append('title', title);
-    formData.append('description', description);
-    formData.append('image', image);
-
     try {
-      const response = await fetch('https://jacinhomes-api.vercel.app/api/catalog/estate', {
-        method: 'POST',
-        body: formData,
+      const imageBase64 = await handleImageUpload(image);
+
+      const payload = {
+        title,
+        description,
+        image: imageBase64.split(",")[1], // Remove the Data URL prefix to keep only the base64 string
+      };
+
+      const response = await fetch("https://jacinhomes-api.vercel.app/api/catalog/estate", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(payload),
       });
 
       if (response.ok) {
-        setSuccess('Estate uploaded successfully');
+        setSuccess("Estate uploaded successfully");
       } else {
         const data = await response.json();
-        setError(data.message || 'Upload failed');
+        setError(data.message || "Upload failed");
       }
     } catch (error) {
-      setError('An error occurred. Please try again.');
+      setError("An error occurred. Please try again.");
     }
   };
 
@@ -60,9 +83,8 @@ const Estate = () => {
         <input
           type="file"
           onChange={(e) => {
-            if (e.target.files && e.target.files.length > 0) {
-              setImage(e.target.files[0] ?? null); // Explicitly handle the case where file might be undefined
-            }
+            const file = e.target.files?.[0] ?? null;
+            setImage(file);
           }}
           className="block w-full p-2 mb-4 border"
         />
