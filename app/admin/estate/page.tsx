@@ -1,4 +1,5 @@
 "use client";
+import axios from "axios";
 import { useState } from "react";
 
 const Estate = () => {
@@ -8,64 +9,46 @@ const Estate = () => {
   const [video, setVideo] = useState<File | null>(null);
   const [error, setError] = useState("");
   const [success, setSuccess] = useState("");
-  const [loading, setLoading] = useState(false); // Add loading state
-
-  const handleFileUpload = (file: File) => {
-    return new Promise<string>((resolve, reject) => {
-      const reader = new FileReader();
-      reader.onloadend = () => {
-        if (reader.result) {
-          resolve(reader.result.toString());
-        } else {
-          reject(new Error("Failed to convert file to base64"));
-        }
-      };
-      reader.onerror = reject;
-      reader.readAsDataURL(file);
-    });
-  };
+  const [loading, setLoading] = useState(false);
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setError("");
     setSuccess("");
-    setLoading(true); // Set loading state to true
+    setLoading(true);
 
     if (!title || !description || (!image && !video)) {
       setError("All fields are required");
-      setLoading(false); // Set loading state to false
+      setLoading(false);
       return;
     }
 
+    const formData = new FormData();
+    formData.append("title", title);
+    formData.append("description", description);
+    if (image) formData.append("files", image);
+    if (video) formData.append("files", video);
+
     try {
-      const imageBase64 = image ? await handleFileUpload(image) : null;
-      const videoBase64 = video ? await handleFileUpload(video) : null;
+      const response = await axios.post(
+        "http://localhost:3001/api/catalog/estate",
+        formData,
+        {
+          headers: {
+            "Content-Type": "multipart/form-data",
+          },
+        }
+      );
 
-      const payload = {
-        title,
-        description,
-        image: imageBase64 ? imageBase64.split(",")[1] : null, // Remove the Data URL prefix to keep only the base64 string
-        video: videoBase64 ? videoBase64.split(",")[1] : null,
-      };
-
-      const response = await fetch("https://jacinhomes-api.vercel.app/api/catalog/estate", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(payload),
-      });
-
-      if (response.ok) {
+      if (response.status === 201) {
         setSuccess("Estate uploaded successfully");
       } else {
-        const data = await response.json();
-        setError(data.message || "Upload failed");
+        setError(response.data.message || "Upload failed");
       }
     } catch (error) {
       setError("An error occurred. Please try again.");
     } finally {
-      setLoading(false); // Set loading state to false
+      setLoading(false);
     }
   };
 
@@ -109,7 +92,7 @@ const Estate = () => {
         <button
           type="submit"
           className="w-full bg-blue-500 text-white p-2 rounded flex items-center justify-center"
-          disabled={loading} // Disable button when loading
+          disabled={loading}
         >
           {loading ? (
             <svg
