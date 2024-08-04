@@ -1,16 +1,10 @@
-const InspectionIcon = (props: React.SVGProps<SVGSVGElement>) => {
+const SmsIcon = (props: React.SVGProps<SVGSVGElement>) => {
   return (
-    <svg
-      xmlns="http://www.w3.org/2000/svg"
-      viewBox="0 0 24 24"
-      width="16"
-      height="16"
-      fill="rgba(255,255,255,1)"
-      {...props}
-    >
-      <path d="M2 11H22V20C22 20.5523 21.5523 21 21 21H3C2.44772 21 2 20.5523 2 20V11ZM17 3H21C21.5523 3 22 3.44772 22 4V9H2V4C2 3.44772 2.44772 3 3 3H7V1H9V3H15V1H17V3Z"></path>
+    <svg width="28" height="28" viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <path d="M19.8334 23.9167H8.16671C4.66671 23.9167 2.33337 22.1667 2.33337 18.0833V9.91666C2.33337 5.83333 4.66671 4.08333 8.16671 4.08333H19.8334C23.3334 4.08333 25.6667 5.83333 25.6667 9.91666V18.0833C25.6667 22.1667 23.3334 23.9167 19.8334 23.9167Z" stroke="#111111" stroke-width="1.5" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"/>
+    <path d="M19.8333 10.5L16.1816 13.4167C14.98 14.3733 13.0083 14.3733 11.8066 13.4167L8.16663 10.5" stroke="#111111" stroke-width="1.5" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"/>
     </svg>
   );
 };
 
-export default InspectionIcon;
+export default SmsIcon;
